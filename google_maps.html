@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #map{
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Map</h1>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            // map  options
+            var options = {
+                zoom: 13,
+                center: {lat:6.5244, lng:3.3792}
+            }
+
+            // new map
+            var map = new google.maps.Map(document.getElementById('map'), options)
+
+            // // add marker
+            // var marker = new google.maps.Marker({
+            //     position: {lat: 6.5095, lng: 3.3711},
+            //     map: map,
+            //     icon: ''
+            // });
+
+            // var infoWindow = new google.maps.InfoWindow({
+            //     content:'<h1>Lagos</h1>'
+            // });
+
+            // marker.addListener('click', function () {
+            //     infoWindow.open(map, marker);
+            // });
+
+            // addMarker one by one
+            // addMarker({
+            //     coords:{lat:6.5244, lng:3.3792},
+            //     iconImage: '',
+            //     content: '<h1>Yaba, Lagos</h1>'
+            // });
+
+            // addMarker({
+            //     coords:{lat:6.5244, lng:3.3792},
+            //     iconImage: '',
+            //     content: '',
+            // });
+
+            // Array of markers
+            var markers = [
+                {
+                    coords:{lat:6.5244, lng:3.3792},
+                    iconImage: '',
+                    content: '<h1>Yaba, Lagos</h1>'
+                },
+                {
+                    coords:{lat:6.5244, lng:3.3792},
+                    iconImage: '',
+                    content: '<h1>Yaba, Lagos</h1>'
+                },
+                {
+                    coords:{lat:6.5244, lng:3.3792},
+                    iconImage: '',
+                    content: '<h1>Yaba, Lagos</h1>'
+                }
+            ];
+
+            //  loop through markers
+            for(var i = 0; i < markers.length; i++){
+                // add marker
+                addMarker(markers[i]);
+            }
+
+            // Add Marker Function
+            function addMarker(props) {
+                var marker = new google.maps.Marker({
+                position: props.coords,
+                map: map
+                // icon: props.iconImage
+                });
+
+                // check for custom icon
+                if (props.iconImage) {
+                    // set icon image
+                    marker.setIcon(props.iconImage);
+                }
+
+                // check content
+                if (props.content) {
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: props.content
+                    });
+
+                    marker.addListener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap"></script>
+</body>
+</html>
